@@ -1,25 +1,31 @@
-import { useNavigate } from "react-router-dom";
-import { ILogin, ILoginResult } from "./types";
-import * as yup from "yup";
-import { useFormik } from "formik";
-import classNames from "classnames";
-import http from "../../../http";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom"; // використовується для переходу по маршрутам
+import { ILogin, ILoginResult } from "./types"; // імпорт інтерфейсів
+import * as yup from "yup"; // Бібліотека для перевірки валідації полів
+import { useFormik } from "formik"; // для керування валідацією
+import classNames from "classnames"; // використовується для застосування css класів до полів залежно від їх стану валідації
+import http from "../../../http"; // для здійснення http запитів
+import { useState } from "react"; // для керування станном змінної
+import { useDispatch } from "react-redux"; // для відправки дій
 import { AuthUserActionType, IUser } from "../types";
-import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode"; // для декодизації jwt-tokena
 
 const LoginPage = () => {
 
   const navigator = useNavigate();
   const dispatch = useDispatch();
 
+
+  // присвоєння початкового значення
   const initValues: ILogin = {
     email: "",
     password: "",
   };
+
+  // зміна стану
   const [message, setMessage] = useState<string>("");
 
+
+  // присвоєння змінній данні про помилки
   const createSchema = yup.object({
     email: yup
       .string()
@@ -28,6 +34,8 @@ const LoginPage = () => {
     password: yup.string().required("Вкажіть опис"),
   });
 
+
+  // Відправляє данні на сервер та переходить на головну сторінку
   const onSubmitFormikData = async (values: ILogin) => {
     try {
         console.log("Formik send data", values);
@@ -52,6 +60,8 @@ const LoginPage = () => {
     }
   }
 
+
+ 
   const formik = useFormik({
     initialValues: initValues,
     validationSchema: createSchema,

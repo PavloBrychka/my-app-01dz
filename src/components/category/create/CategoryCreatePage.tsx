@@ -10,17 +10,23 @@ import defaultImage from "../../../assets/default.jpg";
 const CategoryCreatePage = () => {
   const navigator = useNavigate();
 
+  
   const initValues: ICategoryCreate = {
     name: "",
     image: null,
     description: "",
   };
 
+
+  
+  // присвоєння змінним данні про помилки в випадку валідації
   const createSchema = yup.object({
     name: yup.string().required("Вкажіть назву"),
     description: yup.string().required("Вкажіть опис"),
   });
 
+
+  // Відправка данних на сервер та перехід на головну сторінку
   const onSubmitFormikData = (values: ICategoryCreate) => {
     console.log("Formik send data", values);
     http
@@ -35,6 +41,8 @@ const CategoryCreatePage = () => {
       });
   };
 
+
+  // ініціалізація змінної для подальшого керування нею валідацією
   const formik = useFormik({
     initialValues: initValues,
     validationSchema: createSchema,

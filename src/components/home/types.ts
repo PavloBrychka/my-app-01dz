@@ -1,8 +1,8 @@
 export interface ICategoryItem {
-    id: number,
-    name: string,
-    image: string,
-    description: string
+    id: number, // id товару
+    name: string, // назва елементу
+    image: string,// фото елементу
+    description: string // опис елементу
 }
 
 export interface ICategoryResponse {
@@ -14,5 +14,5 @@ export interface ICategoryResponse {
 
 
 export interface ICategorySearch {
-    page?: number|string|null
+    page?: number|string|null  // пошук
 }

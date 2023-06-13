@@ -5,11 +5,20 @@ import http from "../../../http";
 import { AuthUserActionType, IAuthUser } from "../../auth/types";
 import "./DefaultHeader.css";
 
+
+// Меню
 const DefaultHeader = () => {
   
+
+  // Створюємо змінну для подальшого відправлення данних
   const dispatch = useDispatch();
+
+
+  // Отримуємо данні про користувача (email and name) - якщо входу не було повертає 0
   const { isAuth, user } = useSelector((store: any) => store.auth as IAuthUser);
 
+
+  // Авторизація
   const logout = () => {
     delete http.defaults.headers.common["Authorization"];
     localStorage.removeItem("token");
@@ -76,6 +85,7 @@ const DefaultHeader = () => {
                         to="/logout"
                         onClick={(e) => {
                           e.preventDefault();
+                          // Виводить профіль користувачв що увійшов.
                           logout();
                         }}
                       >

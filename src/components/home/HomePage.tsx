@@ -7,7 +7,11 @@ import http from "../../http";
 import { AuthUserActionType } from "../auth/types";
 import { ICategoryResponse, ICategorySearch } from "./types";
 
+
+
 const HomePage = () => {
+
+  // отримуємо поточну сторінку 
   const [searchParams, setSearchParams] = useSearchParams();
   console.log("page = ", searchParams.get("page"));
 
@@ -15,6 +19,7 @@ const HomePage = () => {
     page: searchParams.get("page") || 1,
   });
 
+  // витягування категорії ... 
   const [category, setCategory] = useState<ICategoryResponse>({
     data: [],
     total: 0,
@@ -22,6 +27,8 @@ const HomePage = () => {
     last_page: 0,
   });
 
+
+  // отримання данних з сервера
   useEffect(() => {
     http
       .get<ICategoryResponse>(`api/category`, {
@@ -37,19 +44,25 @@ const HomePage = () => {
   }, [search]);
 
   const { data, last_page, current_page, total } = category;
+
+  // створює масив кнопок і ініціалізує його 
   const buttons = [];
   for (let i = 1; i <= last_page; i++) {
     buttons.push(i);
   }
 
+  // Відображає кнопки пагінації по масиву buttons
   const pagination = buttons.map((page) => (
     <li
+      // Оновлення сторінки по ключу
       key={page}
       className={classNames("page-item", { active: page === current_page })}
     >
+      {/* Посилання на сторінки */}
       <Link
         className="page-link"
         to={"?page=" + page}
+        //
         onClick={() => setSearch({ ...search, page })}
       >
         {page}
@@ -57,6 +70,8 @@ const HomePage = () => {
     </li>
   ));
 
+
+    // Завантаження данних
   const dataView = data.map((category) => (
     <tr key={category.id}>
       <th>
@@ -70,13 +85,15 @@ const HomePage = () => {
       <td>{category.description}</td>
     </tr>
   ));
+
+  // відправка дій з loginUser та logoutUser без явного імпорту сховища
   const dispatch = useDispatch();
 
   const loginUser = () => {
     console.log("Вхід у систему");
     dispatch({ type: AuthUserActionType.LOGIN_USER });
   };
-
+//
   const logoutUser = () => {
     console.log("Вийти із системи");
     dispatch({ type: AuthUserActionType.LOGOUT_USER });
