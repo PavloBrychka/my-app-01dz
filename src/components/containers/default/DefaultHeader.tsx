@@ -14,7 +14,7 @@ const DefaultHeader = () => {
   const dispatch = useDispatch();
 
 
-  // Отримуємо данні про користувача (email and name) - якщо входу не було повертає 0
+  // Отримуємо данні про стан входу користувача
   const { isAuth, user } = useSelector((store: any) => store.auth as IAuthUser);
 
 

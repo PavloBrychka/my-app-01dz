@@ -19,7 +19,7 @@ const HomePage = () => {
     page: searchParams.get("page") || 1,
   });
 
-  // витягування категорії ... 
+  // витягування данних сторінок
   const [category, setCategory] = useState<ICategoryResponse>({
     data: [],
     total: 0,
