@@ -6,6 +6,7 @@ import CategoryCreatePage from './components/category/create/CategoryCreatePage'
 import { Route, Routes } from 'react-router-dom';
 import DefaultLayout from './components/containers/default/DefaultLayout';
 import LoginPage from './components/auth/login/LoginPage';
+import ProductCreatePage from './components/product/create/ProductCreatePage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<DefaultLayout/>}>
           <Route index element={<HomePage />} />
           <Route path="categories/create" element={<CategoryCreatePage />} />
+          <Route path="products/create" element={<ProductCreatePage/>} />
           <Route path="login" element={<LoginPage />} />
         </Route>
       </Routes>

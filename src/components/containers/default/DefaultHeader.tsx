@@ -58,6 +58,11 @@ const DefaultHeader = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/products/craate">
+                    Додати товар
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <a className="nav-link" href="#">
                     Link
                   </a>
